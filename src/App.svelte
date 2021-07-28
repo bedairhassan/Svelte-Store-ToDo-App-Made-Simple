@@ -1,33 +1,36 @@
 <script>
-	import { items } from "./store";
-
-
-	let display;
-	$: items.subscribe(last=>display=last)
-
-	let item;
-	const submit = () => items.update((last) => [...last, item]);
+	import Tasks from "./Tasks.svelte";
+	import Login from "./Login.svelte";
 </script>
 
 <main>
-	<table>
-		<thead>
-			<th>Name of Task</th>
-		</thead>
-
-		<tbody>
-			{#if display.length>0}
-				{#each display as item}
-					<tr>
-						<td>{item}</td>
-					</tr>
-				{/each}
-			{/if}
-
-			<tr>
-				<td><input type="text" bind:value={item} /></td>
-				<td><button on:click={submit}>add task</button></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="column"><Login /></div>
+		<div class="columntwo"><Tasks /></div>
+	</div>
 </main>
+
+<style>
+	.column {
+		float: left;
+		width: 50%;
+	}
+
+	.columntwo{
+
+		
+		margin-top: 250px;
+		margin-bottom: 50px;
+		margin-right: 50px;
+		margin-left: 50px;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+		
+
+		content: "";
+		display: table;
+		clear: both;
+	}
+</style>
